@@ -1,24 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 
 app = Flask(__name__)
 
-moviesArr = ['Avatar', 'Avengers', 'RRR']
+moviesArr = ['Avatar', 'Avengers', 'RRR', 'antamn']
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
-    return render_template('index.html')
+    if (request.method == 'POST'):
+        return render_template('index.html', marks=int(request.form['marks']))
 
-
-@app.route('/list')
-def list():
-    global moviesArr
-    return render_template('list.html', movies=moviesArr)
-
-
-@app.route('/about')
-def about():
-    return 'THIS IS ABOUT PAGE'
+    else:
+        return render_template('index.html', marks=0)
 
 
 if __name__ == '__main__':

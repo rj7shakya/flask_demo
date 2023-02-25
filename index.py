@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -12,6 +12,16 @@ def hello_world():
 
     else:
         return render_template('index.html', marks=0)
+
+
+@app.route('/age', methods=['GET', 'POST'])
+def age():
+    if (request.method == 'POST'):
+
+        return render_template('age.html', age=int(request.form['age']))
+
+    else:
+        return render_template('age.html', age=0)
 
 
 if __name__ == '__main__':
